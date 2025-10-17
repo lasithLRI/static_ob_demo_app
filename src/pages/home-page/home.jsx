@@ -24,6 +24,8 @@ import InfographicsSummery from "./infographics-summery/infographics-summery.jsx
 import Subtitle from "./subtitle/subtitle.jsx";
 import ConnectedBanks from "./connected-banks/connected-banks.jsx";
 import ConnectedAccounts from "./connected-accounts/connected-accounts.jsx";
+import LatestTransactions from "./latest-transactions/latest-transactions.jsx";
+import StandingOrders from "./standing-orders/standing-orders.jsx";
 
 /**
  * The main component for the product's home page.
@@ -37,7 +39,7 @@ import ConnectedAccounts from "./connected-accounts/connected-accounts.jsx";
  */
 const Home = ({configurations}) => {
     const userInfo = useAuthContext();
-    const {config, isLoading, chartData, total,bankInfoWithTotals,accountInfoWithBankInfo} = configurations;
+    const {config, chartData, total,bankInfoWithTotals,accountInfoWithBankInfo, transactions,standingOrders} = configurations;
 
     const onAddAccount = ()=>{
         console.log("adding account");
@@ -53,6 +55,10 @@ const Home = ({configurations}) => {
                     <ConnectedBanks banksInformationWithTotals={bankInfoWithTotals}/>
                     <Subtitle title={"Connected Accounts"} name={"Add Account"} onAction={onAddAccount} />
                     <ConnectedAccounts accountsInfo={accountInfoWithBankInfo}/>
+                    <Subtitle title={"Latest Transactions"}/>
+                    <LatestTransactions transactions={transactions}/>
+                    <Subtitle title={"Standing Orders"}/>
+                    <StandingOrders standingOrdersData={standingOrders}/>
                 </HomeContentLayout>
             </ApplicationLayout>
         </>

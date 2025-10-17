@@ -89,6 +89,91 @@
       "bank": "Wells Fargo",
       "accountNumber": "4455667788"
     }
+  ],
+  "transactions": [
+    {
+      "id": "T00123456",
+      "date": "2025-10-17",
+      "reference": "INV-4521/ABC",
+      "bank": "Ascend Global",
+      "Account": "1234-5678-9012-3456",
+      "Amount": "1250.75",
+      "Currency": "USD"
+    },
+    {
+      "id": "T00123457",
+      "date": "2025-10-16",
+      "reference": "PAY-9876/XYZ",
+      "bank": "Trust Union",
+      "Account": "9876-5432-1098-7654",
+      "Amount": "500.00",
+      "Currency": "EUR"
+    },
+    {
+      "id": "T00123458",
+      "date": "2025-10-17",
+      "reference": "DEP-3321/LMN",
+      "bank": "Global Asset Trust",
+      "Account": "1111-2222-3333-4444",
+      "Amount": "99.99",
+      "Currency": "GBP"
+    },
+    {
+      "id": "T00123459",
+      "date": "2025-10-15",
+      "reference": "FEE-7765/PQR",
+      "bank": "Ascend Global",
+      "Account": "5555-6666-7777-8888",
+      "Amount": "25.50",
+      "Currency": "USD"
+    }
+  ],
+  "standingOrders": [
+    {
+      "ID": "SO-3001",
+      "Reference": "RENT-OCT-25",
+      "Bank": "Ascend  Global",
+      "Next Date": "2025-11-01",
+      "Status": "Active",
+      "Amount": "1850.00",
+      "Currency": "GBP"
+    },
+    {
+      "ID": "SO-3002",
+      "Reference": "SUBSCRIPTION-PRO",
+      "Bank": "Trust Union",
+      "Next Date": "2025-10-25",
+      "Status": "Active",
+      "Amount": "19.99",
+      "Currency": "USD"
+    },
+    {
+      "ID": "SO-3003",
+      "Reference": "MORTGAGE-PAY",
+      "Bank": "Global Asset Trust",
+      "Next Date": "2025-11-05",
+      "Status": "Active",
+      "Amount": "2100.50",
+      "Currency": "EUR"
+    },
+    {
+      "ID": "SO-3004",
+      "Reference": "UTILITY-ELECTRIC",
+      "Bank": "Ascend Global",
+      "Next Date": "2025-10-28",
+      "Status": "Active",
+      "Amount": "85.20",
+      "Currency": "GBP"
+    },
+    {
+      "ID": "SO-3005",
+      "Reference": "ANNUAL-LICENSE",
+      "Bank": "Trust Union",
+      "Next Date": "2026-01-01",
+      "Status": "Paused",
+      "Amount": "299.00",
+      "Currency": "USD"
+    }
   ]
 }
 

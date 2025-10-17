@@ -18,6 +18,7 @@
 
 import {useEffect, useState} from "react";
 import {api} from "../api.js";
+import {formatCurrency} from "./utility.js";
 
 /**
  * A custom React hook responsible for fetching and processing all application and financial configuration data.
@@ -43,6 +44,8 @@ const useConfigContext = () => {
     const [accountInfoWithBankInfo, setAccountInfoWithBankInfo] = useState(null);
     const [chartData, setChartData] = useState(null);
     const [total, setTotal] = useState(null);
+    const [transactions, setTransactions] = useState([]);
+    const [standingOrders, setStandingOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect( () => {
@@ -85,6 +88,33 @@ const useConfigContext = () => {
                 })
                 setAccountInfoWithBankInfo(accountWithBankInfo)
 
+                const formattedTransactions = response.transactions.map(t => {
+                    const formattedAmount = formatCurrency(t.Currency+ " " +t.Amount);
+
+                    const {Amount, Currency, ...rest} = t;
+
+                    return{
+                        ...rest,
+                        formatedAmount:formattedAmount,
+                    }
+                })
+
+
+                const formattedStandingOrders = response.standingOrders.map(t => {
+                    const formattedAmount = formatCurrency(t.Currency+ " " +t.Amount)
+
+                    const {Amount, Currency, ...rest} = t;
+
+                    return{
+                        ...rest,
+                        formatedAmount:formattedAmount,
+                    }
+                })
+
+                setStandingOrders(formattedStandingOrders)
+
+                setTransactions(formattedTransactions);
+
                 const chartInfo = {
                     labels: bankNames,
                     datasets: [
@@ -107,7 +137,7 @@ const useConfigContext = () => {
         }
         fetchData();
     }, []);
-    return {config,connectedBankDetails, bankInfoWithTotals, isLoading, accountInfoWithBankInfo, chartData, total,};
+    return {config,connectedBankDetails, bankInfoWithTotals, isLoading, accountInfoWithBankInfo, chartData, total,transactions,standingOrders};
 }
 
 export default useConfigContext;
