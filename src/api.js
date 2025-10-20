@@ -16,7 +16,7 @@
  * under the License.
  */
 
-const baseUrl = "/configurations"
+const baseUrl = "/static_ob_demo_app/configurations"
 
 /**
  * A centralized utility function to handle API calls to a base configuration endpoint.
@@ -41,23 +41,44 @@ async function fetchData(endpoint, options = {}) {
         },
     };
 
+    let response;
+    let responseData = null;
+
     try {
-        const response = await fetch(url, config);
+        response = await fetch(url, config);
 
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({message: response.statusText}));
-            const error = new Error(errorData.message || `HTTP error! Status: ${response.status}`);
-            error.status = response.status;
-            error.data = errorData;
+        // if (!response.ok) {
+        //     const errorData = await response.json().catch(() => ({message: response.statusText}));
+        //     const error = new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+        //     error.status = response.status;
+        //     error.data = errorData;
+        // }
+
+        if (response.status !== 204 && response.headers.get('content-length') !== '0') {
+            // Read the response body as JSON. Use .catch() to handle cases
+            // where the body is empty or not valid JSON (e.g., a simple text error).
+            responseData = await response.json().catch((e) => {
+                console.warn(`Could not parse JSON for ${endpoint}. Status: ${response.status}. Error:`, e);
+                // Return a simple object or null if parsing fails
+                return {message: response.statusText || "Empty or invalid response body"};
+            });
         }
+            if (!response.ok) {
+                // Use the parsed responseData for the error object
+                const errorData = responseData || { message: response.statusText || `HTTP error! Status: ${response.status}` };
 
-        if (response.status === 204 || response.headers.get('content-length') === '0') {
-            return null;
-        }
+                const error = new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+                error.status = response.status;
+                error.data = errorData;
 
-        return await response.json();
+                // Log and throw the error
+                console.error(`API Error for ${endpoint}: Status ${error.status}`, error.data);
+                throw error;
+            }
 
-    } catch (error) {
+        return  responseData;
+
+    } catch (error){
         console.error(`API Error for ${endpoint}:`, error);
         throw error;
     }

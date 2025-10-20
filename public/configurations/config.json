@@ -1,8 +1,8 @@
 {
   "user": {
     "name": "James Smith",
-    "image": "/resources/assets/images/profile/dp_image.webp",
-    "background":"/resources/assets/images/background/bg_image.webp"
+    "image": "/static_ob_demo_app/resources/assets/images/profile/dp_image.webp",
+    "background":"/static_ob_demo_app/resources/assets/images/background/bg_image.webp"
   },
   "name": {
     "route": "accounts-central",
@@ -11,21 +11,21 @@
   "banks": [
     {
       "name": "Ascend Global Bank",
-      "image": "/resources/assets/images/logos/assend_global_bank_logo.png",
+      "image": "/static_ob_demo_app/resources/assets/images/logos/assend_global_bank_logo.png",
       "currency": "GBP",
       "color":"rgba(255,135,110,0.6)",
       "border":"rgba(255,135,110, 1)"
     },
     {
       "name": "Global Asset Trust",
-      "image": "/resources/assets/images/logos/global_asset_trust_logo.png",
+      "image": "/static_ob_demo_app/resources/assets/images/logos/global_asset_trust_logo.png",
       "currency": "GBP",
       "color":"rgba(255, 185, 97, 0.6)",
       "border":"rgba(255, 185, 97, 1)"
     },
     {
       "name": "Trust Union",
-      "image": "/resources/assets/images/logos/trust_union_logo.png",
+      "image": "/static_ob_demo_app/resources/assets/images/logos/trust_union_logo.png",
       "currency": "GBP",
       "color":"rgba(254, 239, 184, 0.6)",
       "border":"rgba(254, 239, 184, 1)"
