@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      APP_ROOT: stati-tpp-application
+      APP_ROOT: stati-demo-app-deployment
 
     steps:
 
