@@ -16,9 +16,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    env:
-      APP_ROOT: stati-demo-app-deployment
-
     steps:
 
       - name: Checkout repository
@@ -31,7 +28,6 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          cd ${{env.APP_ROOT}}
           npm install
           npm run build
 
@@ -41,7 +37,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '${{env.APP_ROOT}}/build'
+          path: './build'
 
       - name: Deploy to github pages
         id: deployment
