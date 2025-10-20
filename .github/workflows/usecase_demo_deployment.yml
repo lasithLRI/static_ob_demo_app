@@ -28,8 +28,8 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          npm install
-          npm run build
+          yarn
+          yarn run build
 
       - name: Setup pages
         uses: actions/configure-pages@v5
