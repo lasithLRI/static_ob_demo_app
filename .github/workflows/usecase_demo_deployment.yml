@@ -29,6 +29,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           yarn
+          rm -rf dist
           yarn run build
 
       - name: Setup pages
