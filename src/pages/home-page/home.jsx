@@ -24,24 +24,21 @@ import InfographicsSummery from "./infographics-summery/infographics-summery.jsx
 import Subtitle from "./subtitle/subtitle.jsx";
 import ConnectedBanks from "./connected-banks/connected-banks.jsx";
 import ConnectedAccounts from "./connected-accounts/connected-accounts.jsx";
-import LatestTransactions from "./latest-transactions/latest-transactions.jsx";
-import StandingOrders from "./standing-orders/standing-orders.jsx";
 
-/**
- * The main component for the product's home page.
+/*
+ * Main Home component for the application dashboard.
+ * Displays user information, financial summaries, and connected banks/accounts.
  *
- * It uses the **`useAuthContext`** hook to retrieve **user information** (or authentication state).
- * The component applies the primary application structure using the **`<ApplicationLayout>`**
- * wrapper, and passes the user data to the **`<HeroSection>`** component for personalized display
- * of greetings and quick actions.
+ * Params:
+ * @param {object} configurations - Contains application configuration and financial data objects.
  *
  * @returns {JSX.Element} The rendered Home page, wrapped in the standard application layout.
  */
 const Home = ({configurations}) => {
     const userInfo = useAuthContext();
-    const {config, chartData, total,bankInfoWithTotals,accountInfoWithBankInfo, transactions,standingOrders} = configurations;
+    const {config, chartData, total, bankInfoWithTotals, accountInfoWithBankInfo,transactions,standingOrders} = configurations;
 
-    const onAddAccount = ()=>{
+    const onAddAccount = () => {
         console.log("adding account");
     }
 
@@ -51,9 +48,9 @@ const Home = ({configurations}) => {
                 <HeroSection userInfo={userInfo}/>
                 <HomeContentLayout>
                     <InfographicsSummery total={total} chartData={chartData}/>
-                    <Subtitle title={"Connected Banks"} />
+                    <Subtitle title={"Connected Banks"}/>
                     <ConnectedBanks banksInformationWithTotals={bankInfoWithTotals}/>
-                    <Subtitle title={"Connected Accounts"} name={"Add Account"} onAction={onAddAccount} />
+                    <Subtitle title={"Connected Accounts"} name={"Add Account"} onAction={onAddAccount}/>
                     <ConnectedAccounts accountsInfo={accountInfoWithBankInfo}/>
                     <Subtitle title={"Latest Transactions"}/>
                     <LatestTransactions transactions={transactions}/>

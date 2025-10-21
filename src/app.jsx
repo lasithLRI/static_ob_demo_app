@@ -20,33 +20,35 @@ import {Route, Routes} from "react-router-dom";
 import AppThemeProvider from "./providers/app-theme-provider.jsx";
 import Home from "./pages/home-page/home.jsx";
 import useConfigContext from "./hooks/use-config-context.js";
+import {Suspense} from "react";
+import {useTranslation} from "react-i18next";
 
-/**
- * The root component of the application, responsible for setting up the main routing structure
- * and applying global theming via the `AppThemeProvider`.
- *
- * It consumes the **`ConfigContext`** to dynamically construct the base route path
- * using the configured router name (accessed via `context.routerName.route`).
- * It then defines **nested routes**, such as the 'home' page, within this main product route.
+/*
+ * App component serves as the main entry point for the application structure.
+ * It manages the loading of application configuration via useConfigContext,
+ * initializes the theme provider, and sets up client-side routing using React Router.
  */
 function App() {
 
     const context = useConfigContext();
+    const {t, i18n} = useTranslation();
 
     if (context.isLoading || !context.config) {
         return <div>Loading configuration...</div>;
     }
 
     return (<>
-        <AppThemeProvider>
-            <Routes>
-                <Route path={`/${context.config.route}/*`} element={
-                    <Routes>
-                        <Route path="home" element={<Home configurations={context}/>}/>
-                    </Routes>
-                }/>
-            </Routes>
-        </AppThemeProvider>
+        <Suspense fallback={<div>Loading configuration...</div>}>
+            <AppThemeProvider>
+                <Routes>
+                    <Route path={`/${context.config.route}/*`} element={
+                        <Routes>
+                            <Route path="home" element={<Home configurations={context}/>}/>
+                        </Routes>
+                    }/>
+                </Routes>
+            </AppThemeProvider>
+        </Suspense>
     </>)
 }
 

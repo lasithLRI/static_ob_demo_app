@@ -41,53 +41,17 @@ async function fetchData(endpoint, options = {}) {
         },
     };
 
-    let response;
-    let responseData = null;
-
     try {
-        response = await fetch(url, config);
+        const response = await fetch(url, config);
 
-        // if (!response.ok) {
-        //     const errorData = await response.json().catch(() => ({message: response.statusText}));
-        //     const error = new Error(errorData.message || `HTTP error! Status: ${response.status}`);
-        //     error.status = response.status;
-        //     error.data = errorData;
-        // }
+        return await response.json();
 
-        if (response.status !== 204 && response.headers.get('content-length') !== '0') {
-            // Read the response body as JSON. Use .catch() to handle cases
-            // where the body is empty or not valid JSON (e.g., a simple text error).
-            responseData = await response.json().catch((e) => {
-                console.warn(`Could not parse JSON for ${endpoint}. Status: ${response.status}. Error:`, e);
-                // Return a simple object or null if parsing fails
-                return {message: response.statusText || "Empty or invalid response body"};
-            });
-        }
-            if (!response.ok) {
-                // Use the parsed responseData for the error object
-                const errorData = responseData || { message: response.statusText || `HTTP error! Status: ${response.status}` };
-
-                const error = new Error(errorData.message || `HTTP error! Status: ${response.status}`);
-                error.status = response.status;
-                error.data = errorData;
-
-                // Log and throw the error
-                console.error(`API Error for ${endpoint}: Status ${error.status}`, error.data);
-                throw error;
-            }
-
-        return  responseData;
-
-    } catch (error){
+    } catch (error) {
         console.error(`API Error for ${endpoint}:`, error);
         throw error;
     }
 }
 
-/**
- * An API client object providing simplified methods for common HTTP verbs.
- * Currently, includes only the 'get' method.
- */
 export const api = {
     get: (endpoint, options = {}) => fetchData(endpoint, {method: 'GET', ...options}),
 }
