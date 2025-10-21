@@ -22,5 +22,5 @@ import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
   plugins: [react(), svgr()],
-  base: '/static_ob_demo_app/',
+  base: '/static_ob_demo/',
 });

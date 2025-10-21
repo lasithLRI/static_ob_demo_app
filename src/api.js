@@ -16,7 +16,7 @@
  * under the License.
  */
 
-const baseUrl = "/static_ob_demo_app/configurations"
+const baseUrl = "https://raw.githubusercontent.com/lasithLRI/static-demo/public/configurations/config.json";
 
 /**
  * A centralized utility function to handle API calls to a base configuration endpoint.
@@ -38,7 +38,7 @@ async function fetchData(endpoint, options = {}) {
     const config = {
         ...options, headers: {
             ...defaultHeaders, ...options.headers,
-        },
+        },cache: 'no-store',
     };
 
     let response;
@@ -47,34 +47,20 @@ async function fetchData(endpoint, options = {}) {
     try {
         response = await fetch(url, config);
 
-        // if (!response.ok) {
-        //     const errorData = await response.json().catch(() => ({message: response.statusText}));
-        //     const error = new Error(errorData.message || `HTTP error! Status: ${response.status}`);
-        //     error.status = response.status;
-        //     error.data = errorData;
+        // if (response.status !== 204 && response.headers.get('content-length') !== '0') {
+            responseData = await response.json()
+        //         console.warn(`Could not parse JSON for ${endpoint}. Status: ${response.status}. Error:`, e);
+        //         return {message: response.statusText || "Empty or invalid response body"};
+        //     });.catch((e) => {
         // }
-
-        if (response.status !== 204 && response.headers.get('content-length') !== '0') {
-            // Read the response body as JSON. Use .catch() to handle cases
-            // where the body is empty or not valid JSON (e.g., a simple text error).
-            responseData = await response.json().catch((e) => {
-                console.warn(`Could not parse JSON for ${endpoint}. Status: ${response.status}. Error:`, e);
-                // Return a simple object or null if parsing fails
-                return {message: response.statusText || "Empty or invalid response body"};
-            });
-        }
-            if (!response.ok) {
-                // Use the parsed responseData for the error object
-                const errorData = responseData || { message: response.statusText || `HTTP error! Status: ${response.status}` };
-
-                const error = new Error(errorData.message || `HTTP error! Status: ${response.status}`);
-                error.status = response.status;
-                error.data = errorData;
-
-                // Log and throw the error
-                console.error(`API Error for ${endpoint}: Status ${error.status}`, error.data);
-                throw error;
-            }
+        //     if (!response.ok) {
+        //         const errorData = responseData || { message: response.statusText || `HTTP error! Status: ${response.status}` };
+        //         const error = new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+        //         error.status = response.status;
+        //         error.data = errorData;
+        //         console.error(`API Error for ${endpoint}: Status ${error.status}`, error.data);
+        //         throw error;
+        //     }
 
         return  responseData;
 
