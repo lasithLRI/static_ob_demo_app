@@ -24,6 +24,8 @@ import InfographicsSummery from "./infographics-summery/infographics-summery.jsx
 import Subtitle from "./subtitle/subtitle.jsx";
 import ConnectedBanks from "./connected-banks/connected-banks.jsx";
 import ConnectedAccounts from "./connected-accounts/connected-accounts.jsx";
+import LatestTransactions from "./latest-transactions/latest-transactions.jsx";
+import StandingOrders from "./standing-orders/standing-orders.jsx";
 
 /*
  * Main Home component for the application dashboard.

@@ -34,7 +34,7 @@ i18n.use(I18NextHttpBackend).use(initReactI18next).init({
     ns: ['translation'],
     defaultNS: 'translation',
     backend: {
-        loadPath: '/locales/{{lng}}/{{ns}}.json',
+        loadPath: '/static_ob_demo_app/locales/{{lng}}/{{ns}}.json',
     },
     react:{
         useSuspense: true,
